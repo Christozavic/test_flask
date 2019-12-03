@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户分页操作</title>
+</head>
+<body>
+    <h3>总共有数据：{{ page_data.total }}条；总页数：{{ page_data.pages }}页</h3>
+    <h3>当前第{{ page_data.page }}页</h3>
+    <ul>
+        {% for user in page_data.items %}
+        <li>{{ user.username }} -- {{ user.password }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if page_data.has_prev %}
+        <a href="{{ url_for('page_user', page=page_data.prev_num) }}">上一页</a>
+    {% else %}
+        无上一页
+    {% endif %}
+
+    {% if page_data.has_next %}
+        <a href="{{ url_for('page_user', page=page_data.next_num) }}">下一页</a>
+    {% else %}
+        无下一页
+    {% endif %}
+
+</body>
+</html>
